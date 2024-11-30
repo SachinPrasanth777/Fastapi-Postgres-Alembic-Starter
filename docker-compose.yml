@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    container_name: bloggercontainer
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "8000:5432"
