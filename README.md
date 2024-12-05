@@ -1,4 +1,4 @@
-<h1 align="center" id="title">FastAPI-PostgresSQL-Alembic-Starter</h1>
+<h1 align="center" id="title">FastAPI-PostgreSQL-Alembic-Starter</h1>
 
 ## Installation 🔧
 
