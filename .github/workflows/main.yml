@@ -12,17 +12,27 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.8 
+          python-version: 3.8
+
+      - name: Print debugging information before installing dependencies
+        run: |
+          echo "Working Directory: $(pwd)"
+          echo "Contents of Working Directory: $(ls -l)"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          else
+            echo "requirements.txt not found!"
+            exit 1
+          fi
 
       - name: Install code formatter
         run: |
@@ -32,9 +42,7 @@ jobs:
         run: |
           black --check .
 
-      - name: Print debugging information
+      - name: Print debugging information after installation
         run: |
           echo "Python Version: $(python --version)"
-          echo "Working Directory: $(pwd)"
-          echo "Contents of Working Directory: $(ls -l)"
-          echo "Contents of site-packages: $(ls -l myworld/lib/python*/site-packages)"
+          echo "Contents of site-packages: $(ls -l $(python -c 'import site; print(site.getsitepackages()[0])'))"
