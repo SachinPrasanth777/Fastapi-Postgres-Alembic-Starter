@@ -1,5 +1,5 @@
-from models.blog.models import Post
-from models.user.models import User
+from models.models import Post
+from models.models import User
 
 
 def test_create_post():
